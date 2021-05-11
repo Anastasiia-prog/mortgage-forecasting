@@ -11,16 +11,16 @@ sns.set(rc={'figure.figsize': (11, 8)})
 cb_data = pd.read_csv('data_cb_jan.csv', index_col='Date')
 
 def move_corr(cb_data, google):
-    corr, p = spearmanr(cb_data, google)
+    corr, p = spearmanr(cb_data, yand)
     plt_lst = [corr]
     print('Дата ЦБ c', cb_data.index[0], 'по', cb_data.index[-1])
-    print('Дата Яндекса c', google.index[0], 'по', google.index[-1])
+    print('Дата Яндекса c', yand.index[0], 'по', yand.index[-1])
     print('Корреляция равна', corr)
-    for i in range(1, int(len(google) // 2 + 1), 1):
-        corr, p = spearmanr(cb_data[i:], google[:-i])
+    for i in range(1, int(len(yand) // 2 + 1), 1):
+        corr, p = spearmanr(cb_data[i:], yand[:-i])
         plt_lst.append(corr)
         print('Дата ЦБ c', cb_data.index[i], 'по', cb_data.index[-1])
-        print('Дата Яндекса c', google.index[0], 'по', google.index[-i - 1])
+        print('Дата Яндекса c', yand.index[0], 'по', yand.index[-i - 1])
         print('Корреляция равна', corr)
         print('--------')
 
@@ -38,7 +38,7 @@ cb_data = cb_data[4:]
 move_corr(cb_data, yand)
 move_corr(cb_data, mortg)
 
-cb_econ = pd.read_csv('cb_corr_without_lags.csv', index_col='Date')
+cb_econ = pd.read_csv('cb_corr_econom_without_lags.csv', index_col='Date')
 move_corr(cb_econ.Money, cb_econ.key_rate)
 move_corr(cb_econ.Money, cb_econ.IPC)
 move_corr(cb_econ.Money, cb_econ.diff_of_costs)
