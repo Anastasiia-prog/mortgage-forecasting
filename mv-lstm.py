@@ -25,7 +25,7 @@ import pandas as pd
 
 sns.set(rc={'figure.figsize':(12,8)})
 
-df = pd.read_csv('/content/drive/My Drive/data-mortgage/datacb_corr_multiv_goog.csv', index_col='Date')
+df = pd.read_csv('datacb_corr_multiv_goog.csv', index_col='Date')
 # df = df[2:]
 df = df.fillna(method='pad')
 df.isnull().sum()
